@@ -1,0 +1,31 @@
+buildscript {
+    ext { //build.gradle에서 사용하는 전역변수를 설정
+        springBootVersion = '2.1.7.RELEASE' //springBootVersion 전역변수 생성(아래에 의존성 코드 버전 명시하면 안 됨)
+    }
+    repositories {
+        mavenCentral()
+        jcenter() //라이브러리 업로드가 간단하고, jcenter 등록시 mavenCenteral에도 업로드되도록 자동화 등록 가능
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+//아래 4개 플러그인은 자바와 스프링부트를 사용하기 위한 필수 플러그인.
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' //스프링부트 의존성들을 관리해주는 플러그인
+
+group 'com.wandu.book'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories { //각종 라이브러리(의존성)들을 어떤 원격저장소에서 받을지를 정함. 
+    mavenCentral() //이전부터 많이 사용하던 저장소 but 커스텀 라이브러리 업로드 난이도 높음
+}
+
+dependencies { //프로그램 개발에 필요한 의존성들을 선언함
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
