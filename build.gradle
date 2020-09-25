@@ -27,5 +27,6 @@ repositories { //각종 라이브러리(의존성)들을 어떤 원격저장소�
 
 dependencies { //프로그램 개발에 필요한 의존성들을 선언함
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
