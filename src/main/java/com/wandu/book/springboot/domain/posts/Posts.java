@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter //롬복의 어노테이션. 클래스 내 모든 필드의 Getter 메서드를 자동 생성.
 @NoArgsConstructor //롬복의 어노테이션. 기본 생성자 자동 추가. public Posts() {}와 같은 효과.
 @Entity //JPA의 어노테이션. 테이블과 링크될 클래스임을 나타냄. 일반적으로 카멜 표기법 클래스와 언더스코어 표기법 테이블을 매칭
-public class Posts { //실제 DB의 테이블과 매칭될 클래스. Entity 클래스라고도 함
+public class Posts extends BaseTimeEntity { //실제 DB의 테이블과 매칭될 클래스. Entity 클래스라고도 함
                     // JPA 사용시 DB 데이터에 작업할 경우 이 Entity 클래스의 수정을 통해 작업함
                     // 해당 클래스의 인스턴스 값들이 언제 어디에서 변해야 하는지 코드상으로 명확히 구분하기 힘드므로,
                     // Entity 클래스에서는 절대 Setter 메서드를 만들지 않는다!

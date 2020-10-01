@@ -1,7 +1,9 @@
 package com.wandu.book.springboot.web;
 
 import com.wandu.book.springboot.service.posts.PostsService;
+import com.wandu.book.springboot.web.dto.PostsResponseDto;
 import com.wandu.book.springboot.web.dto.PostsSaveRequestDto;
+import com.wandu.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
