@@ -1,6 +1,9 @@
 package com.wandu.book.springboot.domain.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 //보통 MyBatis에서는 Dao라 부르는 DB Layer 접근자를 JPA에서는 Repository로 부르며, 인터페이스로 생성함.
 // 인터페이스 생성 후 JpaRepository<Entity 클래스, PK타입>을 상속하면 기본 CRUD 메서드가 자동으로 생성됨.
@@ -12,4 +15,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // ->서비스 계층이 무의미하고, 객체가 데이터 덩어리 이상의 역할을 할 수 없음
 // but 도메인 모델에서 처리할 경우 각 도메인이 각자 본인의 이벤트 처리를 하며, 서비스 메서드는 트랜잭션과 도메인 간 순서만 보장함.
 public interface PostsRepository extends JpaRepository<Posts, Long> {
+    @Query("SELECT p FROM Posts p ORDER BY p.id DESC") 
+        //SpringDataJpa에서 제공하지 않는 메서드는 이렇게 쿼리로 작성 가능
+        //해당 코드는 기본 메서드로도 사용 가능. 가독성을 위해 @Query로 한 것
+        //규모 있는 프로젝트는 데이터 조회를 위해 조회용 프레임워크를 추가 사용하기도 하는데, querydsl, jooq, MyBatis 등이 있음
+    List<Posts> findAllDesc();
 }
