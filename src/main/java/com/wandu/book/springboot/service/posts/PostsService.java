@@ -46,4 +46,12 @@ public class PostsService {
             //람다식 사용. .map(posts -> new PostsListResponseDto(posts)) 임.
             //postsRepository 결과로 넘어온 Posts의 Stream을 map을 통해 PostsListResponseDto로 변환->List로 반환하는 메서드
     }
+    
+    @Transactional
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id).orElseThrow(() 
+                -> new IllegalArgumentException("해당하는 게시글이 없습니다. id=" + id));
+        postsRepository.delete(posts); //JpaRepository의 delete 메서드 이용. 
+        // 엔티티를 파라미터로 삭제하는 것과 deleteById 메서드 이용하는 것 둘 다 가능. 엔티티 조회로 존재하는지 여부 확인 후 바로 삭제함 
+    }
 }
