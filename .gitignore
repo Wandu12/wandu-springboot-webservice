@@ -1,3 +1,6 @@
 # Project exclude paths
 .gradle
 .idea
+
+# 보안을 위해 클라이언트 ID, 클라이언트 보안 비밀 추가 방지
+application-oauth.properties

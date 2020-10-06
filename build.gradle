@@ -23,6 +23,7 @@ sourceCompatibility = 1.8
 
 repositories { //각종 라이브러리(의존성)들을 어떤 원격저장소에서 받을지를 정함. 
     mavenCentral() //이전부터 많이 사용하던 저장소 but 커스텀 라이브러리 업로드 난이도 높음
+    jcenter()
 }
 
 dependencies { //프로그램 개발에 필요한 의존성들을 선언함
@@ -38,7 +39,10 @@ dependencies { //프로그램 개발에 필요한 의존성들을 선언함
 
     compile('org.springframework.boot:spring-boot-starter-mustache') //머스테치 사용을 위해 의존성 추가
 
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client') //소셜로그인에 필요한 의존성 추가
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test') //스프링 시큐리티 의존성 추가
 
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.projectlombok:lombok'
