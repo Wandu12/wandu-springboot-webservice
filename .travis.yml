@@ -6,6 +6,9 @@ branches:
   only:
     - master # master브랜치에 push될 떄 Travis CI 수행
 
+before_install: # 권한을 주어야 실행 가능
+  - chmod +x gradlew
+
 # Travis CI 서버 Home
 cache: # 캐시를 이용해 같은 의존성은 한번만 받도록 설정
   directories:
@@ -19,3 +22,4 @@ notifications:
   email:
     recipients:
       - conpub.info@gmail.com
+
