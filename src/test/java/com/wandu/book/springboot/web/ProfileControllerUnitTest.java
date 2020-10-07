@@ -44,7 +44,7 @@ public class ProfileControllerUnitTest {
     }
 
     @Test
-    public void active_profile이_없으면_default가_조회() {
+    public void active_profile_없으면_default가_조회() {
         //given
         String expectedProfile = "default";
         MockEnvironment env = new MockEnvironment();
