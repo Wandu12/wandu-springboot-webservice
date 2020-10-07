@@ -18,10 +18,14 @@ cache: # 캐시를 이용해 같은 의존성은 한번만 받도록 설정
 script: './gradlew clean build' # script: master 브랜치에 푸시되었을 때 수행하는 명령어
 
 # Travis CI에서 빌드해 만든 Jar파일을 S3에 올릴 수 있도록 코드 추가
-before_deploy:
-  - zip -r wandu-springboot-webservice *
-  - mkdir -p deploy
-  - mv wandu-springboot-webservice.zip deploy/wandu-springboot-webservice.zip
+before_deploy: #Travis CI는 특정 파일만 업로드 불가. 디렉토리 단위로만 업로드 가능.
+  - mkdir -p before-deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy #before-deploy로 이동 후 전체 압축
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before.deploy.zip deploy/wandu-springboot-webservice.zip
 
 deploy:
   - provider: s3
