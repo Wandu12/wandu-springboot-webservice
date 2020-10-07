@@ -1,0 +1,21 @@
+language: java
+jdk:
+  - openjdk8
+
+branches:
+  only:
+    - master # master브랜치에 push될 떄 Travis CI 수행
+
+# Travis CI 서버 Home
+cache: # 캐시를 이용해 같은 의존성은 한번만 받도록 설정
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+script: './gradlew clean build' # script: master 브랜치에 푸시되었을 때 수행하는 명령어
+
+# CI 실행완료시 메일로 알림
+notifications:
+  email:
+    recipients:
+      - conpub.info@gmail.com
