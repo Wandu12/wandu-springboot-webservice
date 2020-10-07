@@ -18,7 +18,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management' //스프링부트 의존성들을 관리해주는 플러그인
 
 group 'com.wandu.book'
-version '1.0-SNAPSHOT'
+version '1.0.1-SNAPSHOT' //프로젝트 버전 변경
 sourceCompatibility = 1.8
 
 repositories { //각종 라이브러리(의존성)들을 어떤 원격저장소에서 받을지를 정함. 

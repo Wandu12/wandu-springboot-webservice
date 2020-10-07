@@ -25,7 +25,7 @@ before_deploy: #Travis CI는 특정 파일만 업로드 불가. 디렉토리 단
   - cp build/libs/*.jar before-deploy/
   - cd before-deploy && zip -r before-deploy * #before-deploy로 이동 후 전체 압축
   - cd ../ && mkdir -p deploy
-  - mv before-deploy/before.deploy.zip deploy/wandu-springboot-webservice.zip
+  - mv before-deploy/before-deploy.zip deploy/wandu-springboot-webservice.zip
 
 deploy:
   - provider: s3
