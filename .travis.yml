@@ -17,12 +17,6 @@ cache: # 캐시를 이용해 같은 의존성은 한번만 받도록 설정
 
 script: './gradlew clean build' # script: master 브랜치에 푸시되었을 때 수행하는 명령어
 
-# CI 실행완료시 메일로 알림
-notifications:
-  email:
-    recipients:
-      - conpub.info@gmail.com
-
 # Travis CI에서 빌드해 만든 Jar파일을 S3에 올릴 수 있도록 코드 추가
 before_deploy:
   - zip -r wandu-springboot-webservice *
@@ -39,3 +33,20 @@ deploy:
     acl: private # zip 파일 접근을 private로 함
     local_dir: deploy # before_deploy에서 생성한 디렉토리
     wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: wandu-springboot-build # S3 버킷
+    key: wandu-springboot-webservice.zip
+    bundle_type: zip
+    application: wandu-springboot-webservice
+    deployment_group: wandu-springboot-webservice-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
+# CI 실행완료시 메일로 알림
+notifications:
+  email:
+    recipients:
+      - conpub.info@gmail.com
