@@ -23,3 +23,19 @@ notifications:
     recipients:
       - conpub.info@gmail.com
 
+# Travis CI에서 빌드해 만든 Jar파일을 S3에 올릴 수 있도록 코드 추가
+before_deploy:
+  - zip -r wandu-springboot-webservice *
+  - mkdir -p deploy
+  - mv wandu-springboot-webservice.zip deploy/wandu-springboot-webservice.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: wandu-springboot-build # S3 버킷
+    region: ap-northeast-2
+    skin_cleanup: true
+    acl: private # zip 파일 접근을 private로 함
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
